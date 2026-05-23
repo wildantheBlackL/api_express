@@ -1,14 +1,14 @@
 const mysql = require('mysql2/promise');
 let sql;
+
 const buatKoneksi = async () => {
-    return await mysql.createConnection({
-        host    : 'alphanet.full.diskon.cloud', // host Hosting A
-        user    : 'alpha126_express',           // ✅ user yang [%] / remote
-        password: 'GMjXk2XIjJtc',       // password user express
+    return await mysql.createConnection({  // ✅ hapus nested buatKoneksi
+        host: 'alphanet.full.diskon.cloud', // ✅ ganti localhost
+        user: 'alpha126_express',           // ✅ user yang [%]
+        password: 'GMjXk2XIjJtc',
         database: 'alpha126_keuanga'
     })
 }
-
 
 const tambahBackup = async (id, nama, channel) => {
     const db = await buatKoneksi();
@@ -31,4 +31,5 @@ const tambahTransaksi = async (idx, id, waktux, nominalx, jenisx, deskripsix) =>
         return "0";
     }
 }
+
 module.exports = {buatKoneksi, tambahBackup, tambahTransaksi}

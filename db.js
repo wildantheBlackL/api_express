@@ -1,15 +1,14 @@
 const mysql = require('mysql2/promise');
 let sql;
 const buatKoneksi = async () => {
-    console.log('DB_HOST:', process.env.DB_HOST);
-    console.log('DB_USER:', process.env.DB_USER);
-    console.log('DB_NAME:', process.env.DB_NAME);
+    const buatKoneksi = async () => {
     return await mysql.createConnection({
-        host    : process.env.DB_HOST,
-        user    : process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_NAME
+        host    : 'alphanet.full.diskon.cloud', // host Hosting A
+        user    : 'alpha126_express',           // ✅ user yang [%] / remote
+        password: 'GMjXk2XIjJtc',       // password user express
+        database: 'alpha126_keuanga'
     })
+}
 }
 
 const tambahBackup = async (id, nama, channel) => {

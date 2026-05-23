@@ -1,7 +1,6 @@
 const mysql = require('mysql2/promise');
 let sql;
 const buatKoneksi = async () => {
-    const buatKoneksi = async () => {
     return await mysql.createConnection({
         host    : 'alphanet.full.diskon.cloud', // host Hosting A
         user    : 'alpha126_express',           // ✅ user yang [%] / remote
@@ -9,7 +8,7 @@ const buatKoneksi = async () => {
         database: 'alpha126_keuanga'
     })
 }
-}
+
 
 const tambahBackup = async (id, nama, channel) => {
     const db = await buatKoneksi();

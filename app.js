@@ -7,7 +7,7 @@ const port = process.env.PORT || 5775;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // ✅ Fix #2: typo "extende" → "extended"
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/status", (req, res) => {
     res.json({
@@ -19,7 +19,7 @@ app.get("/status", (req, res) => {
 app.post("/backup", async (req, res) => {
     let pesanx, kodex;
     let nama = req.body.nama_backup;
-    let dtx = atob(req.body.dtx);
+    let dtx = Buffer.from(req.body.dtx, 'base64').toString('utf-8'); // ✅ fix atob
     let id = Date.now();
     let arr_data = dtx.split("#");
     let proses = await db.tambahBackup(id, nama, "nodejs");
@@ -27,7 +27,7 @@ app.post("/backup", async (req, res) => {
     if (proses == "1") {
         let berhasil = 0;
         let gagal = 0;
-        for (k of arr_data) {
+        for (let k of arr_data) { // ✅ tambah let
             let arr_data2 = k.split("|");
             let idx        = arr_data2[0];
             let deskripsix = arr_data2[1];

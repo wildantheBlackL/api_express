@@ -2,9 +2,9 @@ const mysql = require('mysql2/promise');
 let sql;
 
 const buatKoneksi = async () => {
-    return await mysql.createConnection({  // ✅ hapus nested buatKoneksi
-        host: 'alphanet.full.diskon.cloud', // ✅ ganti localhost
-        user: 'alpha126_express',           // ✅ user yang [%]
+    return await mysql.createConnection({  
+        host: 'alphanet.full.diskon.cloud',
+        user: 'alpha126_express',           
         password: 'GMjXk2XIjJtc',
         database: 'alpha126_keuanga'
     })

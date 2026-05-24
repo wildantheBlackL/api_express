@@ -7,8 +7,7 @@ const port = 5775;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // ✅ Fix #2: typo "extende" → "extended"
-
+app.use(express.urlencoded({ extended: true })); 
 app.get("/status", (req, res) => {
     res.json({
         kode: "01",

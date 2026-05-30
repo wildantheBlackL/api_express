@@ -3,10 +3,12 @@ let sql;
 
 const buatKoneksi = async () => {
     return await mysql.createConnection({  
-        host: 'alphanet.full.diskon.cloud',
-        user: 'alpha126_express',           
-        password: 'GMjXk2XIjJtc',
-        database: 'alpha126_keuanga'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
+        port: process.env.DB_PORT,
+        ssl: { rejectUnauthorized: false }
     })
 }
 

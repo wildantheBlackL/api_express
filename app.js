@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const db = require('./db.js');
+const axios = require('axios');
 
 const app = express();
 const port = 5775;
@@ -44,6 +45,19 @@ app.post("/backup", async (req, res) => {
         pesanx = { kode: "00", status: "Proses Backup Gagal, Periksa Kembali Data Anda" };
         kodex = 500;
     }
+
+    // TAMBAHAN - sync ke Laravel
+    try {
+        await axios.post('https://alphanet.full.diskon.cloud/api/backup-sync', {
+            id: id,
+            nama: nama,
+            channel: "nodejs",
+            transaksi: arr_data
+        });
+    } catch (e) {
+        console.log('Sync ke Laravel gagal:', e.message);
+    }
+
     return res.status(kodex).json(pesanx);
 });
 
@@ -51,11 +65,3 @@ app.listen(port, () => {
     console.log(`API Berjalan di Port: ${port}`);
 });
 
-app.get("/testdb", async (req, res) => {
-    try {
-        const conn = await db.buatKoneksi();
-        res.json({ status: "Koneksi berhasil!" });
-    } catch (error) {
-        res.json({ status: "Gagal", error: error.message });
-    }
-});

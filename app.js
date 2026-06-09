@@ -1,40 +1,19 @@
 const express = require("express");
 const cors = require("cors");
 const db = require('./db.js');
-const axios = require('axios');
 
 const app = express();
 const port = 5775;
 
-const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(204);
-    }
-    next();
-});
-
-
 app.get("/status", (req, res) => {
     res.json({
         kode: "01",
         status: "API Berbasis ExpressJS OK"
     });
 });
-
-
 
 app.post("/backup", async (req, res) => {
     let pesanx, kodex;
@@ -65,23 +44,9 @@ app.post("/backup", async (req, res) => {
         pesanx = { kode: "00", status: "Proses Backup Gagal, Periksa Kembali Data Anda" };
         kodex = 500;
     }
-
-    // TAMBAHAN - sync ke Laravel
-    try {
-        await axios.post('https://alphanet.full.diskon.cloud/api/backup-sync', {
-            id: id,
-            nama: nama,
-            channel: "nodejs",
-            transaksi: arr_data
-        });
-    } catch (e) {
-        console.log('Sync ke Laravel gagal:', e.message);
-    }
-
     return res.status(kodex).json(pesanx);
 });
 
 app.listen(port, () => {
     console.log(`API Berjalan di Port: ${port}`);
 });
-

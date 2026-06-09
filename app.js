@@ -50,3 +50,20 @@ app.post("/backup", async (req, res) => {
 app.listen(port, () => {
     console.log(`API Berjalan di Port: ${port}`);
 });
+
+app.get("/testdb", async (req, res) => {
+    try {
+        const conn = await mysql.createConnection({
+            host: 'alphanet.full.diskon.cloud',
+            user: 'alpha126_express',
+            password: 'passwordmu',
+            database: 'alpha126_keuanga',
+            port: 3306,
+            ssl: { rejectUnauthorized: false }
+        });
+        await conn.connect();
+        res.json({ status: "Koneksi berhasil!" });
+    } catch (error) {
+        res.json({ status: "Gagal", error: error.message });
+    }
+});

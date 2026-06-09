@@ -56,13 +56,21 @@ app.get("/daftar_backup", async (req, res) => {
     }
 });
 
-app.post("/detail_backup", async (req, res) => {
-    let idbackup = req.body.idbackup;
-    const dtdetail = await db.bacaDetailBackup(idbackup);
-    if(dtdetail == false){
-        res.send('{"kode":"00","pesan":"Data Detail Backup Tidak Di Temukan"}');
-    }else{
-        res.send('{"kode":"01","pesan":"Data Detail Backup Di Temukan","data":' + JSON.stringify(dtdetail) + '}');
+app.get("/daftar_backup", async (req, res) => {
+    try {
+        const dtbackup = await db.bacaBackup();
+        if (dtbackup == false) {
+            return res.send('{"kode":"00","pesan":"Data Backup Tidak Di Temukan"}');
+        } else {
+            return res.send('{"kode":"01","pesan":"Data Backup Di Temukan","data":' + JSON.stringify(dtbackup) + '}');
+        }
+    } catch (err) {
+        // Mengirimkan pesan error asli ke browser/Postman agar ketahuan rusaknya di mana
+        return res.status(500).json({ 
+            status: "Error 500",
+            pesan: "Ada masalah di server/database",
+            errorAsli: err.message 
+        });
     }
 });
 

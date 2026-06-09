@@ -35,16 +35,10 @@ const tambahTransaksi = async (idx, id, waktux, nominalx, jenisx, deskripsix) =>
 }
 
 const bacaBackup = async () => {
-    try {
-        const db = await buatKoneksi();
-        // Tambahkan const di depan sql
-        const sql = `SELECT * FROM backup ORDER BY waktu DESC`;
-        const [rows] = await db.execute(sql);
-        return rows.length > 0 ? rows : false;
-    } catch (error) {
-        console.error("Error di fungsi bacaBackup:", error.message);
-        throw error; // Lempar error agar ditangkap oleh route
-    }
+    const db = await buatKoneksi();
+    sql = `SELECT * FROM backup ORDER BY waktu DESC`;
+    const [rows] = await db.execute(sql);
+    return rows.length > 0 ? rows : false;
 }
 
 const bacaDetailBackup = async (id_backup) => {
@@ -54,4 +48,4 @@ const bacaDetailBackup = async (id_backup) => {
     return rows.length > 0 ? rows : false;
 }
 
-module.exports = {buatKoneksi, tambahBackup, tambahTransaksi}
+module.exports = {buatKoneksi, tambahBackup, tambahTransaksi, bacaBackup, bacaDetailBackup}

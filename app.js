@@ -56,7 +56,7 @@ app.get("/testdb", async (req, res) => {
         const conn = await mysql.createConnection({
             host: 'alphanet.full.diskon.cloud',
             user: 'alpha126_express',
-            password: 'passwordmu',
+            password: 'JIs4A21wehnx',
             database: 'alpha126_keuanga',
             port: 3306,
             ssl: { rejectUnauthorized: false }

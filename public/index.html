@@ -520,11 +520,50 @@ tbody tr:hover{
                 const kolom = Object.keys(rows[0]);
 
                 let html = '<table><thead><tr>';
-                kolom.forEach(k => html += `<th>${k}</th>`);
+
+                kolom.forEach(k => {
+                    if (k === 'waktu') {
+                        html += '<th>Tanggal</th><th>Jam</th>';
+                    } else {
+                        html += `<th>${k}</th>`;
+                    }
+                });
+
                 html += '</tr></thead><tbody>';
                 rows.forEach(row => {
-                    html += '<tr>' + kolom.map(k => `<td>${row[k] ?? ''}</td>`).join('') + '</tr>';
-                });
+
+    html += '<tr>';
+
+    kolom.forEach(k => {
+
+        if (k === 'waktu') {
+
+            const d = new Date(row[k]);
+
+            const tanggal = d.toLocaleDateString('id-ID', {
+                timeZone: 'Asia/Jakarta'
+            });
+
+            const jam = d.toLocaleTimeString('en-GB', {
+                timeZone: 'Asia/Jakarta',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            html += `<td>${tanggal}</td>`;
+            html += `<td>${jam}</td>`;
+
+        } else {
+
+            html += `<td>${row[k] ?? ''}</td>`;
+
+        }
+
+    });
+
+    html += '</tr>';
+});
                 html += '</tbody></table>';
 
                 tableWrap.innerHTML = html;

@@ -545,7 +545,7 @@ tbody tr:hover{
                 timeZone: 'Asia/Jakarta'
             });
 
-            const jam = d.toLocaleTimeString('en-GB', {
+            const jam = d.toLocaleTimeString('id-ID', {
                 timeZone: 'Asia/Jakarta',
                 hour: '2-digit',
                 minute: '2-digit',
@@ -569,7 +569,10 @@ tbody tr:hover{
 
                 tableWrap.innerHTML = html;
                 statTotal.textContent = rows.length;
-                statTerakhir.textContent = rows[0][kolom[kolom.length - 1]] ?? '—';
+                const last = rows[0].waktu;
+                const d = new Date(last);
+                statTerakhir.textContent =
+                d.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
                 riwayatCount.textContent = `${rows.length} entri`;
             })
             .catch(() => {

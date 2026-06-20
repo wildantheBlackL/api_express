@@ -41,16 +41,7 @@ app.get("/status", (req, res) => {
 });
 
 app.post('/notifikasi-backup', (req, res) => {
-
-    const data = req.body;
-
-    kirimEvent({
-        status: 'selesai',
-        channel: data.channel,
-        berhasil: data.berhasil,
-        gagal: data.gagal
-    });
-
+    kirimEvent(req.body);  
     res.json({ ok: true });
 });
 

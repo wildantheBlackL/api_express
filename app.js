@@ -40,15 +40,20 @@ app.get("/status", (req, res) => {
     });
 });
 
-let lastLaravelHeartbeat = 0;
+app.post('/notifikasi-backup', (req, res) => {
 
-app.post('/heartbeat', (req, res) => {
-    lastLaravelHeartbeat = Date.now();
+    const data = req.body;
 
-    res.json({
-        status: 'ok'
+    broadcast({
+        status: 'selesai',
+        channel: data.channel,
+        berhasil: data.berhasil,
+        gagal: data.gagal
     });
+
+    res.json({ ok: true });
 });
+
 
 app.post("/backup", async (req, res) => {
     let pesanx, kodex;

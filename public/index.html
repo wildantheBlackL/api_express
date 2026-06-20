@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
     :root {
-        --bg: #0E1614;
-        --bg-panel: #141F1C;
-        --bg-panel-raised: #1A2622;
-        --border: #25342F;
-        --text: #ECE8DE;
-        --text-muted: #8FA39B;
-        --gold: #C9A227;
-        --gold-soft: rgba(201, 162, 39, 0.12);
-        --green: #5FA77E;
-        --green-soft: rgba(95, 167, 126, 0.12);
-        --red: #C1574B;
-        --red-soft: rgba(193, 87, 75, 0.12);
+        --bg: #F1EEE2;
+        --bg-panel: #FFFFFF;
+        --bg-panel-raised: #F6F3E7;
+        --border: #DCD6C1;
+        --text: #1E2A23;
+        --text-muted: #6B7A70;
+        --gold: #A9781F;
+        --gold-soft: rgba(169, 120, 31, 0.10);
+        --green: #3F7D5C;
+        --green-soft: rgba(63, 125, 92, 0.10);
+        --red: #A23B30;
+        --red-soft: rgba(162, 59, 48, 0.10);
 
         --font-display: 'Fraunces', serif;
         --font-body: 'IBM Plex Sans', sans-serif;
@@ -97,14 +97,14 @@
         flex-shrink: 0;
     }
 
-    .dot.ok { background: var(--green); box-shadow: 0 0 0 0 rgba(95,167,126,0.6); animation: pulse 2s infinite; }
+    .dot.ok { background: var(--green); box-shadow: 0 0 0 0 rgba(63,125,92,0.5); animation: pulse 2s infinite; }
     .dot.bad { background: var(--red); }
     .dot.wait { background: var(--text-muted); }
 
     @keyframes pulse {
-        0%   { box-shadow: 0 0 0 0 rgba(95,167,126,0.5); }
-        70%  { box-shadow: 0 0 0 6px rgba(95,167,126,0); }
-        100% { box-shadow: 0 0 0 0 rgba(95,167,126,0); }
+        0%   { box-shadow: 0 0 0 0 rgba(63,125,92,0.45); }
+        70%  { box-shadow: 0 0 0 6px rgba(63,125,92,0); }
+        100% { box-shadow: 0 0 0 0 rgba(63,125,92,0); }
     }
 
     /* ===== Stat row ===== */
@@ -149,6 +149,7 @@
         border: 1px solid var(--border);
         border-radius: 12px;
         overflow: hidden;
+        box-shadow: 0 1px 2px rgba(30, 42, 35, 0.04);
     }
 
     .panel-head {

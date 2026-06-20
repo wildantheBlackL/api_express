@@ -44,7 +44,7 @@ app.post('/notifikasi-backup', (req, res) => {
 
     const data = req.body;
 
-    broadcast({
+    kirimEvent({
         status: 'selesai',
         channel: data.channel,
         berhasil: data.berhasil,
@@ -53,7 +53,6 @@ app.post('/notifikasi-backup', (req, res) => {
 
     res.json({ ok: true });
 });
-
 
 app.post("/backup", async (req, res) => {
     let pesanx, kodex;

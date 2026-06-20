@@ -12,6 +12,17 @@ const buatKoneksi = async () => {
     })
 }
 
+const cekKoneksi = async () => {
+    try{
+        const db = await buatKoneksi();
+        await db.end();
+        return "1";
+    }catch(err){
+        return "0";
+    }
+}
+ 
+
 const tambahBackup = async (id, nama, channel) => {
     const db = await buatKoneksi();
     sql = `INSERT INTO backup VALUES('${id}','${nama}','${channel}',NOW())`;
@@ -48,4 +59,4 @@ const bacaDetailBackup = async (id_backup) => {
     return rows.length > 0 ? rows : false;
 }
 
-module.exports = {buatKoneksi, tambahBackup, tambahTransaksi, bacaBackup, bacaDetailBackup}
+module.exports = {buatKoneksi, cekKoneksi, tambahBackup, tambahTransaksi, bacaBackup, bacaDetailBackup}

@@ -66,34 +66,13 @@ app.post("/detail_backup", async (req, res) => {
     }
 })
 app.get("/test_db", async (req, res) => {
-    try {
-        const conn = await mysql.createConnection({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASS,
-            database: process.env.DB_NAME,
-            port: process.env.DB_PORT,
-            ssl: false
-        });
- 
-        const [rows] = await conn.query("SELECT 1+1 AS hasil");
-        await conn.end();
- 
-        res.json({
-            kode: "01",
-            status: "Koneksi Database Berhasil",
-            hasil: rows
-        });
-    } catch (err) {
-        res.status(500).json({
-            kode: "00",
-            status: "Koneksi Database Gagal",
-            error: err.message
-        });
+    const proses = await db.cekKoneksi();
+    if (proses == "1") {
+        res.json({ kode: "01", status: "Koneksi Database Berhasil" });
+    } else {
+        res.status(500).json({ kode: "00", status: "Koneksi Database Gagal" });
     }
 });
- 
-
 
 app.listen(port, () => {
     console.log(`API Berjalan di Port: ${port}`);

@@ -22,7 +22,7 @@ const tambahBackup = async (id, nama, channel) => {
         return "0";
     }
 }
-
+``
 const tambahTransaksi = async (idx, id, waktux, nominalx, jenisx, deskripsix) => {
     const db = await buatKoneksi();
     sql = `INSERT INTO backup_transaksi VALUES('${idx}','${id}','${waktux}','${nominalx}','${jenisx}','${deskripsix}')`;

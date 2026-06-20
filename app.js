@@ -65,6 +65,35 @@ app.post("/detail_backup", async (req, res) => {
         res.send('{"kode":"01","pesan":"Data Detail Backup Di Temukan","data":' + JSON.stringify(dtdetail) + '}');
     }
 })
+app.get("/test_db", async (req, res) => {
+    try {
+        const conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            port: process.env.DB_PORT,
+            ssl: false
+        });
+ 
+        const [rows] = await conn.query("SELECT 1+1 AS hasil");
+        await conn.end();
+ 
+        res.json({
+            kode: "01",
+            status: "Koneksi Database Berhasil",
+            hasil: rows
+        });
+    } catch (err) {
+        res.status(500).json({
+            kode: "00",
+            status: "Koneksi Database Gagal",
+            error: err.message
+        });
+    }
+});
+ 
+
 
 app.listen(port, () => {
     console.log(`API Berjalan di Port: ${port}`);

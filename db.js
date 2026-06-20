@@ -18,6 +18,7 @@ const cekKoneksi = async () => {
         await db.end();
         return "1";
     }catch(err){
+        console.error("Error cekKoneksi:", err.message);
         return "0";
     }
 }

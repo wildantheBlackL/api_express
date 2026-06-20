@@ -40,6 +40,16 @@ app.get("/status", (req, res) => {
     });
 });
 
+let lastLaravelHeartbeat = 0;
+
+app.post('/heartbeat', (req, res) => {
+    lastLaravelHeartbeat = Date.now();
+
+    res.json({
+        status: 'ok'
+    });
+});
+
 app.post("/backup", async (req, res) => {
     let pesanx, kodex;
     let nama = req.body.nama_backup;

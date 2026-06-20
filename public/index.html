@@ -503,6 +503,10 @@ tbody tr:hover{
         }
     };
 
+    function laravelOnline() {
+    return Date.now() - lastLaravelHeartbeat < 60000;
+}
+
     // ===== Riwayat backup =====
     function muatRiwayat() {
         fetch('/daftar_backup')
